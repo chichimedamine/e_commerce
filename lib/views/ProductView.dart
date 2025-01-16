@@ -14,8 +14,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import '../hive/cart.dart';
 
-
-
 class Productview extends StatefulWidget {
   final int id;
 
@@ -26,7 +24,7 @@ class Productview extends StatefulWidget {
 }
 
 class _ProductviewState extends State<Productview> {
-  final int quantity = 1;
+  int quantity = 1;
   @override
   void initState() {
     super.initState();
@@ -97,7 +95,8 @@ class _ProductviewState extends State<Productview> {
                             category: state.product.category,
                             image: state.product.image,
                             rating: state.product.rating,
-                            quantity: quantity),
+                            quantity: quantity ,
+                            totalPrice: state.product.price * quantity),
                       ]),
                     ));
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -132,6 +131,16 @@ class _ProductviewState extends State<Productview> {
               width: 10,
             ),
             CountButton(
+              onPressedDown: (count) {
+                setState(() {
+                  quantity = count;
+                });
+              },
+              onPressedUp: (count) {
+                setState(() {
+                 quantity = count;
+                });
+              },
               width: 110,
               height: 30,
               initialCount: quantity,

@@ -31,7 +31,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         count = data.length;
         for (var element in data) {
           for (var p in element.products!) {
-            totalPrice += p.price;
+            totalPrice += p.price*p.quantity!;
           }
         }
 

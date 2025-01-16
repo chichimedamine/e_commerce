@@ -1,3 +1,5 @@
+
+
 import 'package:e_commerce/helper/ColorsHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
@@ -5,12 +7,16 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../helper/FontsHelper.dart';
 
 class CountButton extends StatelessWidget {
+  final Function? onPressedDown;
+  final Function? onPressedUp;
   int minCount;
   int maxCount;
   int initialCount;
   double height;
   double width;
   CountButton({
+    required this.onPressedDown,
+    required this.onPressedUp,
     super.key,
     required this.minCount,
     required this.maxCount,
@@ -45,10 +51,9 @@ class CountButton extends StatelessWidget {
                 onPressed: () {
                   if (initialCount > minCount) {
                     setState(() {
-                       
                       initialCount--;
-                      
                     });
+                    onPressedDown!.call(initialCount);
                   }
                 },
                 icon: const Icon(
@@ -71,6 +76,7 @@ class CountButton extends StatelessWidget {
                     setState(() {
                       initialCount++;
                     });
+                    onPressedUp!.call(initialCount);
                   }
                 },
                 icon: const Icon(
